@@ -32,12 +32,8 @@ export default function MenuSection() {
   return (
     <section id="menu" className="relative overflow-hidden py-20">
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-olive/25 to-transparent"
         aria-hidden="true"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 10%, rgba(23, 77, 73, 0.08) 0%, transparent 42%), radial-gradient(circle at 80% 90%, rgba(167, 124, 82, 0.1) 0%, transparent 38%)",
-        }}
       />
 
       <div className="relative mx-auto flex w-full max-w-3xl flex-col gap-16 px-5 sm:px-6 lg:px-8">
