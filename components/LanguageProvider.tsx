@@ -1,0 +1,58 @@
+"use client";
+
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { type Locale, getTranslations } from "@/lib/ui";
+import { getFeaturedDishes, getMenuSections } from "@/lib/menu";
+
+type LanguageContextValue = {
+  locale: Locale;
+  setLocale: (locale: Locale) => void;
+  t: ReturnType<typeof getTranslations>;
+  featuredDishes: ReturnType<typeof getFeaturedDishes>;
+  menuSections: ReturnType<typeof getMenuSections>;
+};
+
+const LanguageContext = createContext<LanguageContextValue | null>(null);
+
+const STORAGE_KEY = "mare-vivo-locale";
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const [locale, setLocale] = useState<Locale>("en");
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (saved === "it" || saved === "en") {
+      setLocale(saved);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(STORAGE_KEY, locale);
+    document.documentElement.lang = locale;
+  }, [locale]);
+
+  const value = useMemo(
+    () => ({
+      locale,
+      setLocale,
+      t: getTranslations(locale),
+      featuredDishes: getFeaturedDishes(locale),
+      menuSections: getMenuSections(locale),
+    }),
+    [locale]
+  );
+
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error("useLanguage must be used within LanguageProvider");
+  }
+  return context;
+}
