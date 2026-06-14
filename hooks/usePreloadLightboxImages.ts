@@ -9,12 +9,12 @@ export function usePreloadLightboxImages(sources: string[]) {
 
     const run = () => preloadLightboxImages(urls);
 
-    if ("requestIdleCallback" in window) {
+    if (typeof window.requestIdleCallback === "function") {
       const id = window.requestIdleCallback(run, { timeout: 2500 });
       return () => window.cancelIdleCallback(id);
     }
 
-    const id = window.setTimeout(run, 400);
-    return () => window.clearTimeout(id);
+    const id = setTimeout(run, 400);
+    return () => clearTimeout(id);
   }, [sources]);
 }
