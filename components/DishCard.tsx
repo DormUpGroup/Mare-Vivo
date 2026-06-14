@@ -4,13 +4,16 @@ import type { Dish } from "@/lib/menu";
 type DishCardProps = {
   dish: Dish;
   onSelect?: () => void;
+  onPreload?: () => void;
 };
 
-export default function DishCard({ dish, onSelect }: DishCardProps) {
+export default function DishCard({ dish, onSelect, onPreload }: DishCardProps) {
   return (
     <button
       type="button"
       onClick={onSelect}
+      onPointerEnter={onPreload}
+      onFocus={onPreload}
       className="group flex h-full w-full flex-col overflow-hidden rounded-3xl bg-card text-left shadow-soft transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deep"
     >
       <div className="relative aspect-[4/3] shrink-0 overflow-hidden">

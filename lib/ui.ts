@@ -40,6 +40,7 @@ export const translations = {
       title: "A Taste of the Mediterranean",
       description:
         "Each dish is guided by simplicity: fresh seafood, olive oil, citrus, and coastal herbs.",
+      viewDish: "View dish",
     },
     about: {
       eyebrow: "Our Story",
@@ -53,7 +54,7 @@ export const translations = {
       familyStoryContinued:
         "Their son Marco grew up sorting crates of amberjack and langoustine before school. Today, with his sister Elena, we still meet the same fishermen at the dock each morning — men who knew our nonno by name. The dining room has grown, but the table remains ours: family recipes, hands that remember how to fillet branzino just so, and the quiet hope that you feel, even for one evening, like you've been welcomed home.",
       familySignature: "— Elena & Marco, second generation",
-      imageAlt: "Italian coastal dining atmosphere",
+      imageAlt: "Seaside restaurant terrace along the Mediterranean coast",
     },
     booking: {
       eyebrow: "Book & Order",
@@ -129,6 +130,7 @@ export const translations = {
       title: "Il gusto del Mediterraneo",
       description:
         "Ogni piatto è guidato dalla semplicità: pesce fresco, olio d'oliva, agrumi ed erbe costiere.",
+      viewDish: "Vedi piatto",
     },
     about: {
       eyebrow: "La nostra storia",
@@ -142,7 +144,7 @@ export const translations = {
       familyStoryContinued:
         "Loro figlio Marco cresceva smistando cassette di ricciola e scampi prima di andare a scuola. Oggi, con sua sorella Elena, attendiamo ancora ogni mattina al molo gli stessi pescatori che conoscevano nostro nonno per nome. La sala è cresciuta, ma il tavolo resta il nostro: ricette di famiglia, mani che ricordano come sfilettare il branzino, e la speranza silenziosa che voi, anche solo per una sera, vi sentiate a casa.",
       familySignature: "— Elena e Marco, seconda generazione",
-      imageAlt: "Atmosfera di ristorazione costiera italiana",
+      imageAlt: "Terrazza di ristorante sul mare lungo la costa mediterranea",
     },
     booking: {
       eyebrow: "Prenota & Ordina",

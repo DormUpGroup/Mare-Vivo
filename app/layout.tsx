@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import SplashScreen from "@/components/SplashScreen";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -19,8 +20,6 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://marevivo.it";
 const title = "Mare Vivo | Fresh Seafood. Mediterranean Soul.";
 const description =
   "A premium coastal seafood restaurant in the heart of Italy. Fresh catch, minimalist elegance, and Mediterranean warmth.";
-const ogImage =
-  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&h=630&auto=format&fit=crop";
 
 export const metadata: Metadata = {
   title,
@@ -45,14 +44,6 @@ export const metadata: Metadata = {
     title,
     description,
     siteName: "Mare Vivo",
-    images: [
-      {
-        url: ogImage,
-        width: 1200,
-        height: 630,
-        alt: "Mare Vivo – coastal seafood restaurant",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -90,7 +81,10 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
         />
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <SplashScreen />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

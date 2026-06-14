@@ -20,7 +20,7 @@ export type MenuSection = {
 };
 
 const menuImage = (id: string) =>
-  `https://images.unsplash.com/${id}?q=80&w=800&auto=format&fit=crop`;
+  `https://images.unsplash.com/${id}?q=70&w=480&auto=format&fit=crop`;
 
 export const menuItemImages: Record<string, string> = {
   "Ostriche del Mediterraneo": menuImage(
@@ -36,6 +36,19 @@ export const menuItemImages: Record<string, string> = {
   "Calamari Ripieni": menuImage("photo-1559070135-f259b369bf87"),
 };
 
+export const featuredDishImages: Record<string, string> = {
+  "Crudo di Mare": menuImage("photo-1654095221806-4340755b9922"),
+  "Risotto ai Frutti di Mare": menuImage("photo-1778104683416-5fc7eba1799f"),
+  "Branzino al Forno": menuImage("photo-1716816211582-ef70b1cd2e70"),
+  "Gamberi alla Griglia": menuImage("photo-1723325697529-6e2679650b39"),
+};
+
+const withFeaturedImages = (dishes: Array<Omit<Dish, "image">>): Dish[] =>
+  dishes.map((dish) => ({
+    ...dish,
+    image: featuredDishImages[dish.name],
+  }));
+
 const withImages = (
   items: Array<Omit<MenuItem, "image">>
 ): MenuItem[] =>
@@ -45,66 +58,50 @@ const withImages = (
   }));
 
 const featuredDishesByLocale: Record<Locale, Dish[]> = {
-  en: [
+  en: withFeaturedImages([
     {
       name: "Crudo di Mare",
       description: "Amberjack, langoustine, citrus oil, Sicilian sea salt.",
       price: "€24",
-      image:
-        "https://images.unsplash.com/photo-1473093226795-af9932fe5856?q=80&w=1600&auto=format&fit=crop",
     },
     {
       name: "Risotto ai Frutti di Mare",
       description: "Carnaroli rice, mussels, clams, and saffron broth.",
       price: "€22",
-      image:
-        "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?q=80&w=1600&auto=format&fit=crop",
     },
     {
       name: "Branzino al Forno",
       description: "Whole sea bass, rosemary, olives, lemon, EVOO.",
       price: "€28",
-      image:
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600&auto=format&fit=crop",
     },
     {
       name: "Gamberi alla Griglia",
       description: "Grilled red prawns, garlic, parsley, smoked sea salt.",
       price: "€26",
-      image:
-        "https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=1600&auto=format&fit=crop",
     },
-  ],
-  it: [
+  ]),
+  it: withFeaturedImages([
     {
       name: "Crudo di Mare",
       description: "Ricciola, scampo, olio agli agrumi, sale marino siciliano.",
       price: "€24",
-      image:
-        "https://images.unsplash.com/photo-1473093226795-af9932fe5856?q=80&w=1600&auto=format&fit=crop",
     },
     {
       name: "Risotto ai Frutti di Mare",
       description: "Riso Carnaroli, cozze, vongole e brodo allo zafferano.",
       price: "€22",
-      image:
-        "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?q=80&w=1600&auto=format&fit=crop",
     },
     {
       name: "Branzino al Forno",
       description: "Spigola intera, rosmarino, olive, limone, olio EVO.",
       price: "€28",
-      image:
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600&auto=format&fit=crop",
     },
     {
       name: "Gamberi alla Griglia",
       description: "Gamberi rossi alla griglia, aglio, prezzemolo, sale affumicato.",
       price: "€26",
-      image:
-        "https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=1600&auto=format&fit=crop",
     },
-  ],
+  ]),
 };
 
 const menuSectionsByLocale: Record<Locale, MenuSection[]> = {

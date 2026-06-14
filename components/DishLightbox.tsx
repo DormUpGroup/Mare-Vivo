@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { lightboxSrc, preloadLightboxImage } from "@/lib/images";
 import type { Dish } from "@/lib/menu";
 
 type DishLightboxProps = {
@@ -10,8 +11,13 @@ type DishLightboxProps = {
 };
 
 export default function DishLightbox({ dish, onClose }: DishLightboxProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     if (!dish) return;
+
+    setIsLoaded(false);
+    preloadLightboxImage(dish.image);
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -27,6 +33,8 @@ export default function DishLightbox({ dish, onClose }: DishLightboxProps) {
   }, [dish, onClose]);
 
   if (!dish) return null;
+
+  const fullSrc = lightboxSrc(dish.image);
 
   return (
     <div
@@ -69,12 +77,28 @@ export default function DishLightbox({ dish, onClose }: DishLightboxProps) {
         <div className="relative aspect-[4/3] sm:aspect-[16/10]">
           <Image
             src={dish.image}
+            alt=""
+            fill
+            unoptimized
+            aria-hidden="true"
+            className="object-cover scale-105 blur-[2px] brightness-90"
+            sizes="100vw"
+          />
+
+          <Image
+            key={fullSrc}
+            src={fullSrc}
             alt={dish.name}
             fill
-            className="object-cover"
-            sizes="(max-width: 896px) 100vw, 896px"
             priority
+            fetchPriority="high"
+            className={`object-cover transition-opacity duration-300 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            sizes="(max-width: 896px) 100vw, 896px"
+            onLoad={() => setIsLoaded(true)}
           />
+
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
 
           <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10">

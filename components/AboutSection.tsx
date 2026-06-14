@@ -37,10 +37,10 @@ export default function AboutSection() {
           <Parallax speed={0.22}>
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-soft">
               <Image
-                src="https://images.unsplash.com/photo-1498579809087-ef1e558fd1da?q=80&w=1600&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1766928102338-203d0e91d290?q=80&w=1600&auto=format&fit=crop"
                 alt={t.about.imageAlt}
                 fill
-                className="object-cover scale-110"
+                className="object-cover object-center scale-110"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>

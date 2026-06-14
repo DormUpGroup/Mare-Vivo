@@ -1,16 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import DishCard from "./DishCard";
 import DishLightbox from "./DishLightbox";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 import { useLanguage } from "./LanguageProvider";
+import { usePreloadLightboxImages } from "@/hooks/usePreloadLightboxImages";
+import { preloadLightboxImage } from "@/lib/images";
 import type { Dish } from "@/lib/menu";
 
 export default function FeaturedDishes() {
   const { t, featuredDishes } = useLanguage();
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
+  const imageSources = useMemo(
+    () => featuredDishes.map((dish) => dish.image),
+    [featuredDishes]
+  );
+
+  usePreloadLightboxImages(imageSources);
 
   return (
     <section id="featured" className="bg-sand py-20">
@@ -25,7 +33,11 @@ export default function FeaturedDishes() {
         <div className="grid items-stretch gap-8 md:grid-cols-2 lg:grid-cols-4">
           {featuredDishes.map((dish, index) => (
             <Reveal key={dish.name} delay={index * 100} className="h-full">
-              <DishCard dish={dish} onSelect={() => setSelectedDish(dish)} />
+              <DishCard
+                dish={dish}
+                onSelect={() => setSelectedDish(dish)}
+                onPreload={() => preloadLightboxImage(dish.image)}
+              />
             </Reveal>
           ))}
         </div>

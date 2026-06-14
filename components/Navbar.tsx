@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Logo from "./Logo";
 import { useLanguage } from "./LanguageProvider";
 
 export default function Navbar() {
@@ -50,10 +51,17 @@ export default function Navbar() {
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
         <a
           href="/"
-          className="font-serif text-xl font-semibold tracking-wide text-heading"
+          className="group flex items-center gap-2.5"
           onClick={closeMobile}
+          aria-label="Mare Vivo — Home"
         >
-          Mare Vivo
+          <Logo
+            size={36}
+            className="text-deep transition-transform duration-300 group-hover:scale-105"
+          />
+          <span className="font-serif text-xl font-semibold tracking-wide text-heading">
+            Mare Vivo
+          </span>
         </a>
         <nav
           className="hidden items-center gap-8 text-sm uppercase tracking-[0.2em] text-muted md:flex"
